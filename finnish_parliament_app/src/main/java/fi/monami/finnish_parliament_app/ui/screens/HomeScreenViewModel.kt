@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 class ParliamentMemberViewModel(application: Application) :  AndroidViewModel(application){
     private val parliamentMemberDB = ParliamentMemberDatabase.getDatabase(application)
 
-    private val offlineParliamentMemberRepository = OfflineParliamentMemberRepository(parliamentMemberDB.parliamentMemberDao())
+    private val offlineParliamentMemberRepository = OfflineParliamentMemberRepository(parliamentMemberDB.parliamentMemberDao(), assessmentDao = parliamentMemberDB.assessmentDao())
     private val networkParliamentMemberRepository = NetworkParliamentMemberRepository()
 
     private val parliamentMemberRepository = DefaultParliamentRepository(offlineParliamentMemberRepository, networkParliamentMemberRepository)

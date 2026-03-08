@@ -7,6 +7,8 @@ interface ParliamentMemberRepository {
     fun getParliamentMemberStream(id: Int): Flow<ParliamentMemberEntity>
     fun getAllParties(): Flow<Set<String>>
     fun getAllPartyMembers(party: String): Flow<List<ParliamentMemberEntity>>
+    suspend fun insertAssessment(assessmentEntity: AssessmentEntity)
+    fun getAllAssessmentsForMember(personNumber: Int): Flow<List<AssessmentEntity>>
 }
 
 class DefaultParliamentRepository(
@@ -44,5 +46,13 @@ class DefaultParliamentRepository(
 
     override fun getAllPartyMembers(party: String): Flow<List<ParliamentMemberEntity>> {
         return local.getAllPartyMembers(party)
+    }
+
+    override suspend fun insertAssessment(assessmentEntity: AssessmentEntity) {
+        local.insertAssessment(assessmentEntity)
+    }
+
+    override fun getAllAssessmentsForMember(personNumber: Int): Flow<List<AssessmentEntity>> {
+        return local.getAllAssessmentsForMember(personNumber)
     }
 }

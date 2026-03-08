@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
+
 
 // Provides ApplicationContext needed to initialize the Room database.
 class PartyMemberViewModel(
@@ -30,7 +30,7 @@ class PartyMemberViewModel(
         checkNotNull(savedStateHandle[PartyMemberDestination.partyArg])
     private val parliamentMemberDB = ParliamentMemberDatabase.getDatabase(application)
 
-    private val offlineParliamentMemberRepository = OfflineParliamentMemberRepository(parliamentMemberDB.parliamentMemberDao())
+    private val offlineParliamentMemberRepository = OfflineParliamentMemberRepository(parliamentMemberDB.parliamentMemberDao(), assessmentDao = parliamentMemberDB.assessmentDao())
     private val networkParliamentMemberRepository = NetworkParliamentMemberRepository()
 
     private val parliamentMemberRepository = DefaultParliamentRepository(offlineParliamentMemberRepository, networkParliamentMemberRepository)
