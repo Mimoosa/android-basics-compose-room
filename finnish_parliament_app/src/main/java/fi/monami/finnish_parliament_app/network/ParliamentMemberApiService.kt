@@ -12,7 +12,7 @@ private const val BASE_URL =
 // ignore picture key from url source
 val json = Json { ignoreUnknownKeys = true }
 
-val retrofit = Retrofit.Builder()
+private val retrofit = Retrofit.Builder()
     .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
     .baseUrl(BASE_URL)
     .build()

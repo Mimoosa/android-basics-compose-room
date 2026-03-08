@@ -17,6 +17,6 @@ data class ParliamentMemberEntity(
     val twitter: String = "",
     val bornYear: Int,
     val constituency: String,
-    // Picture is loaded from a separate API, so set a default initial value.
-    val picture: String = ""
+    // Picture URL is constructed manually using last name, first name, and personNumber.
+    val imgUrl: String
 )
