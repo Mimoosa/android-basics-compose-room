@@ -18,4 +18,6 @@ class OfflineParliamentMemberRepository(private val parliamentMemberDao: Parliam
 
     suspend fun insertAssessment(assessmentEntity: AssessmentEntity) = assessmentDao.insert(assessmentEntity)
     fun getAllAssessmentsForMember(personNumber: Int): Flow<List<AssessmentEntity>> = assessmentDao.getAllAssessmentsForMember(personNumber)
+
+    fun getFavoritePoliticians(): Flow<FavoritePoliticianScore> = assessmentDao.getFavoritePolitician()
 }

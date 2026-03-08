@@ -10,6 +10,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import fi.monami.finnish_parliament_app.ui.screens.DetailMemberDestination
 import fi.monami.finnish_parliament_app.ui.screens.DetailMemberScreen
+import fi.monami.finnish_parliament_app.ui.screens.FavoriteMemberDestination
+import fi.monami.finnish_parliament_app.ui.screens.FavoriteMemberScreen
 import fi.monami.finnish_parliament_app.ui.screens.HomeDestination
 import fi.monami.finnish_parliament_app.ui.screens.HomeScreen
 import fi.monami.finnish_parliament_app.ui.screens.PartyMemberDestination
@@ -33,6 +35,11 @@ fun ParliamentNavHost(
             HomeScreen(
                 navigateToPartyMemberScreen = {
                 navController.navigate("${PartyMemberDestination.route}/$it")
+                },
+                navigateToFavoriteMemberScreen = {personNumber, score ->
+                    navController.navigate(
+                        "${FavoriteMemberDestination.route}/$personNumber/$score"
+                    )
                 }
             )
         }
@@ -60,6 +67,17 @@ fun ParliamentNavHost(
             DetailMemberScreen(
                 navigateBack = { navController.popBackStack()}
             )
+        }
+
+        composable(
+            route = FavoriteMemberDestination.routeWithArgs,
+            arguments = listOf(navArgument(FavoriteMemberDestination.personIdArg){
+                type = NavType.IntType
+            }, navArgument(FavoriteMemberDestination.scoreArg){
+                type = NavType.IntType
+            })
+        ) {
+            FavoriteMemberScreen(navigateBack = { navController.popBackStack()})
         }
     }
 }

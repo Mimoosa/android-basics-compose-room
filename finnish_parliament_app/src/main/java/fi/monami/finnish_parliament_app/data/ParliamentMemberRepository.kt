@@ -9,6 +9,7 @@ interface ParliamentMemberRepository {
     fun getAllPartyMembers(party: String): Flow<List<ParliamentMemberEntity>>
     suspend fun insertAssessment(assessmentEntity: AssessmentEntity)
     fun getAllAssessmentsForMember(personNumber: Int): Flow<List<AssessmentEntity>>
+    fun getFavoritePolitician(): Flow<FavoritePoliticianScore>
 }
 
 class DefaultParliamentRepository(
@@ -54,5 +55,9 @@ class DefaultParliamentRepository(
 
     override fun getAllAssessmentsForMember(personNumber: Int): Flow<List<AssessmentEntity>> {
         return local.getAllAssessmentsForMember(personNumber)
+    }
+
+    override fun getFavoritePolitician(): Flow<FavoritePoliticianScore> {
+        return local.getFavoritePoliticians()
     }
 }
